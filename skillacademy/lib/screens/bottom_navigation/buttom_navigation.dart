@@ -1,18 +1,25 @@
 import 'package:skillacademy/export/export.dart';
-import 'package:skillacademy/screens/bottom_navigation/widgets/buttom_navigation_options.dart';
-import 'package:skillacademy/screens/buttom_navigation_screens/calenderpage_screen/calenderpage.dart';
-import 'package:skillacademy/screens/buttom_navigation_screens/locationpage_screen/locationpage.dart';
-import 'package:skillacademy/screens/buttom_navigation_screens/profilepage_screen/profilepage.dart';
-ValueNotifier<int> indexChangeNotifer = ValueNotifier(0);
 
+/// A screen that displays a `BottomNavigationBar` with navigation options to switch between multiple pages.
+///
+/// This widget manages the navigation between different screens using a `ValueNotifier`
+/// to track the selected index. The screens are displayed based on the selected index,
+/// which is updated through the `ValueNotifier<int>` called `indexChangeNotifer`.
+///
+/// The available pages are:
+/// - `MyHomePage()`
+/// - `Locationpage()`
+/// - `Calenderpage()`
+/// - `Profilepage()`
 class BottomNavigationoptionScreen extends StatelessWidget {
-  const BottomNavigationoptionScreen({super.key});
+  BottomNavigationoptionScreen({super.key});
 
-  final _pages = const [
-    MyHomePage(),
-    Locationpage(),
-    Calenderpage(),
-    Profilepage(),
+  /// A list of pages to navigate between based on the selected index.
+  final _pages = [
+    MyHomePage(), // Home page
+    const Locationpage(), // Location page
+    const Calenderpage(), // Calendar page
+    const Profilepage(), // Profile page
   ];
 
   @override
@@ -20,13 +27,16 @@ class BottomNavigationoptionScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ValueListenableBuilder(
-          valueListenable: indexChangeNotifer,
+          valueListenable:
+              indexChangeNotifer, // Listening to changes in indexChangeNotifer
           builder: (context, int index, _) {
+            // Returns the page corresponding to the selected index
             return _pages[index];
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavigationWidget(),
+      bottomNavigationBar:
+          const BottomNavigationWidget(), // Bottom navigation bar widget
     );
   }
 }

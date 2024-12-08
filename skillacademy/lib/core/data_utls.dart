@@ -1,3 +1,6 @@
+import 'package:skillacademy/export/export.dart';
+
+ValueNotifier<int> indexChangeNotifer = ValueNotifier(0);
 final List<String> teacherImage = [
   "assets/images/image copy 13.png",
   "assets/images/image copy 14.png",

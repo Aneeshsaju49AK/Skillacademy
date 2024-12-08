@@ -1,39 +1,43 @@
 import 'package:skillacademy/export/export.dart';
-import 'package:skillacademy/screens/bottom_navigation/buttom_navigation.dart';
 
+/// The main entry point of the application.
 void main() {
+  // Runs the root widget of the application.
   runApp(const MyApp());
 }
 
+/// The root widget of the Flutter application.
+///
+/// This widget initializes the application and sets up the theme, title,
+/// and starting screen.
 class MyApp extends StatelessWidget {
+  /// Default constructor for the MyApp class.
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  /// Builds the widget tree for the application.
+  ///
+  /// Returns a [MaterialApp] widget with:
+  /// - Application title
+  /// - Material 3 design enabled
+  /// - No debug banner
+  /// - The `BottomNavigationoptionScreen` as the home screen
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Sets the title of the application, visible to the OS.
       title: 'Skillacademy',
+      
+      // Disables the debug banner in development mode.
       debugShowCheckedModeBanner: false,
+      
+      // Applies the theme for the application with Material 3 enabled.
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: customWhite,
         useMaterial3: true,
       ),
-      home: const BottomNavigationoptionScreen(),
+      
+      // Sets the initial screen of the app.
+      home: BottomNavigationoptionScreen(),
     );
   }
 }

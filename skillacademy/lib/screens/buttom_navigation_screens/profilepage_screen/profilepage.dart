@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:skillacademy/export/export.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
