@@ -1,29 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skillacademy/core/colors_utls.dart';
+import 'package:skillacademy/core/data_utls.dart';
 import 'package:skillacademy/screens/mathematical_screen.dart/mathematicspage.dart';
 import 'package:skillacademy/services/common_services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-final List<String> catergoryImage = [
-  "assets/images/image copy 5.png",
-  "assets/images/image copy 6.png",
-  "assets/images/image copy 7.png",
-  "assets/images/image copy 8.png",
-  "assets/images/image copy 9.png",
-  "assets/images/image copy 10.png",
-  "assets/images/image copy 11.png",
-  "assets/images/image copy 12.png",
-];
 
-final List<String> catergoryName = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "Commerce",
-  "English",
-  "Hindi",
-  "Cs"
-];
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -33,6 +15,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     final sizeHeight = MediaQuery.sizeOf(context).height;
@@ -73,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             CustomContainer(
               sizeWidth: sizeWidth,
               sizeHeight: sizeHeight,
-              heightNeeded: 15,
+              heightNeeded: 14,
               widthNeeded: 1,
               child: CustomTextField(),
             ),
@@ -89,9 +72,50 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: sizeWidth / 1.1,
                     height: sizeHeight / 4.5,
                     decoration: BoxDecoration(
-                        color: Colors.amber,
+                        color: customPurple,
                         borderRadius: BorderRadius.circular(14)),
-                    child: Text("data"),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: -30,
+                          child: CircleAvatar(radius: 60,backgroundColor: translucentGrey,),),
+                          Positioned(
+                          top: 150, left: 70,
+                          child: CircleAvatar(radius: 60,backgroundColor: translucentGrey,),),
+                          Positioned(
+                            top: 15,
+                            left: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CustomText(content: "We have got you\ncovered with our\nTop Teachers",fontSize: 20,fontWeight: FontWeight.w600,),
+                                Image.asset("assets/images/image copy 19.png",scale: 2.3,)
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 140,
+                            left: 120,
+                            child: Container(
+                              width: sizeWidth/3,
+                              height: sizeHeight/ 30,
+
+                              child: SmoothPageIndicator(
+                      controller: _pageController,  // Link to the PageView
+                      count: 4,  // Number of pages
+                      effect: WormEffect(
+                        dotWidth: 15,
+                        dotHeight: 10,
+                        spacing: 8,
+                        dotColor: Colors.grey,
+                        activeDotColor: Colors.white,
+                      ),
+                    ),
+                            ),
+                          )
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -115,9 +139,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           const CustomSizedBox(
                             sizeWidth: 25,
                           ),
-                          CustomText(content: "Categories"),
+                          CustomText(content: "Categories",fontWeight: FontWeight.w500,fontSize: 18,),
                           Spacer(),
-                          CustomText(content: "See all"),
+                          CustomText(content: "See all",color: Colors.grey,),
                           const CustomSizedBox(
                             sizeWidth: 25,
                           ),
@@ -208,6 +232,10 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search Teacher...', // Label text
+          hintStyle: TextStyle(
+            color: Colors.grey,
+            fontSize: 14,
+          ),
           prefixIcon: const Icon(
             Icons.search,
             size: 30,
@@ -226,16 +254,29 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomText extends StatelessWidget {
+  final String content;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+
   const CustomText({
     super.key,
     required this.content,
+    this.fontSize,
+    this.fontWeight,
+    this.color,
   });
-
-  final String content;
 
   @override
   Widget build(BuildContext context) {
-    return Text(content);
+    return Text(
+      content,
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      ),
+    );
   }
 }
 
